@@ -88,7 +88,6 @@ pipeline {
 
                     git switch office
                     git merge ${params.branch}
-                    git push
                 """
             }
         }
