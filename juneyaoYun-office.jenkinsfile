@@ -123,7 +123,7 @@ pipeline {
         stage ('kubernetes update apps') {
             steps{
                 sh """
-                    ssh root@10.230.7.20 "kubectl set image deployment/office-${params.app} office-${params.app}=${repositry}:${tag} -n app-office"
+                    ssh root@10.230.7.20 "kubectl set image deployment/${params.app} ${params.app}=${repositry}:${tag} -n app-office"
                 """
             }
         }
