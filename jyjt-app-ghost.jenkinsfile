@@ -80,7 +80,7 @@ pipeline {
                 sh """
                     if [ ${params.app} == "vue" ] ; then 
                         cd $WORKSPACE/group-app-manage
-                    elif [ ${params.app} == "api" || ${params.app} == "web" ] ;then
+                    elif [[ ${params.app} == "api" || ${params.app} == "web" ]] ;then
                         cd $WORKSPACE/juneyaoYun
                     fi
                     git reset --hard HEAD
@@ -96,7 +96,7 @@ pipeline {
         stage('compile') {
             steps {
                 sh """
-                    if [ ${params.app} == "api" || ${params.app} == "web" ] ;then
+                    if [[ ${params.app} == "api" || ${params.app} == "web" ]] ;then
                         cd $WORKSPACE/juneyaoYun
                         /usr/local/apache-maven-3.8.1/bin/mvn clean install
                     elif [ ${params.app} == "vue" ];then
@@ -109,7 +109,7 @@ pipeline {
         stage ('copy jar files') {
             steps {
                 sh """
-                    if [ ${params.app} == "api" || ${params.app} == "web" ] ;then
+                    if [[ ${params.app} == "api" || ${params.app} == "web" ]] ;then
                         cp -fr $WORKSPACE/juneyaoYun/juneyaoYun-${params.app}/target/juneyaoYun-${params.app}-0.0.1-SNAPSHOT.jar $WORKSPACE/juneyaoYun/juneyaoYun-${params.app}/to-docker-${params.app}/
                     elif [ ${params.app} == "vue" ];then
                         echo "vue don't need copy files"
@@ -121,7 +121,7 @@ pipeline {
         stage ('operation by docker') {
             steps{
                 sh """
-                    if [ ${params.app} == "api" || ${params.app} == "web" ] ;then
+                    if [[ ${params.app} == "api" || ${params.app} == "web" ]] ;then
                         cd $WORKSPACE/juneyaoYun/juneyaoYun-${params.app}/to-docker-${params.app}
                     elif [ ${params.app} == "vue" ];then
                         cd $WORKSPACE/group-app-manage
