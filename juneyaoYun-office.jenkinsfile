@@ -87,6 +87,7 @@ pipeline {
                     git pull origin ${params.branch}
 
                     git switch office
+                    git reset --hard origin/office
                     git merge ${params.branch}
                 """
             }
