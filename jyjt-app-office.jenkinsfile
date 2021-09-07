@@ -41,7 +41,8 @@ properties([
                     classpath: [],
                     sandbox: false,
                     script:
-                        """ if (branch.equals("office")){
+                        ''' 
+                            if (branch.equals("office")){
                                 return["api","web","vue"]
                             }
                             elif (branch.equals("develop")){
@@ -50,7 +51,7 @@ properties([
                             elif (branch.equals("master")){
                                 return["api","web","vue"]
                             }
-                        """
+                        '''
                 ]
             ]
         ],
