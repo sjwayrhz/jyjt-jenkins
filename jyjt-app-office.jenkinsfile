@@ -41,14 +41,13 @@ properties([
                     classpath: [],
                     sandbox: false,
                     script:
-                        ''' 
-                            if (branch.equals("office")){
+                        ''' if (branch.equals("develop")){
                                 return["api","web","vue"]
                             }
-                            elif (branch.equals("develop")){
+                            else if (branch.equals("master")){
                                 return["api","web","vue"]
                             }
-                            elif (branch.equals("master")){
+                            else if (branch.equals("office")){
                                 return["api","web","vue"]
                             }
                         '''
