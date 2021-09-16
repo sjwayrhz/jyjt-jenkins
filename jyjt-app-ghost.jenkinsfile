@@ -18,7 +18,7 @@ properties([
                     classpath: [],
                     sandbox: false,
                     script:
-                        'return["develop","master"]'
+                        'return["develop","master","office"]'
                 ]
             ]
         ],
@@ -45,6 +45,9 @@ properties([
                                 return["api","web","vue"]
                             }
                             else if (branch.equals("master")){
+                                return["api","web","vue"]
+                            }
+                            else if (branch.equals("office")){
                                 return["api","web","vue"]
                             }
                         '''
@@ -136,7 +139,10 @@ pipeline {
         stage ('kubernetes update apps') {
             steps{
                 sh """
-                 if [ "${params.branch}" == "develop" ];then {
+                 if [ "${params.branch}" == "office" ];then {
+                        echo "office"
+                    }
+                 elif [ "${params.branch}" == "develop" ];then {
                     ssh 192.168.177.45 "kubectl set image deployment/${params.app} ${params.app}=${repositry}:${tag} -n app-dev"
                     }
                  elif [ "${params.branch}" == "master" ];then {
